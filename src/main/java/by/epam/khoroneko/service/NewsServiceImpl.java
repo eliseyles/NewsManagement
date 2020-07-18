@@ -39,10 +39,16 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void delete(News news) throws ServiceException {
+    public void delete(List<News> newsList) throws ServiceException {
         try {
-            validator.isValidNewsId(news);
-            newsDAO.delete(news);
+            if (newsList != null) {
+                for (News news : newsList) {
+                    validator.isValidNewsId(news);
+                }
+                newsDAO.delete(newsList);
+            } else {
+                throw new ServiceException("Invalid newslist");
+            }
         } catch (DAOException | ValidationException ex) {
             logger.error(ex);
             throw new ServiceException(ex);

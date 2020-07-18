@@ -10,7 +10,7 @@ public interface NewsDAO {
 
     void update(News news) throws DAOException;
 
-    void delete(News news) throws DAOException;
+    void delete(List<News> newsList) throws DAOException;
 
     News getById(News news) throws DAOException;
 
