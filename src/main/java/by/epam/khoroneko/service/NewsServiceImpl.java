@@ -6,6 +6,7 @@ import by.epam.khoroneko.exception.DAOException;
 import by.epam.khoroneko.exception.ServiceException;
 import by.epam.khoroneko.exception.ValidationException;
 import by.epam.khoroneko.factory.DAOFactory;
+import by.epam.khoroneko.util.ExceptionValue;
 import by.epam.khoroneko.validation.NewsValidator;
 import org.apache.log4j.Logger;
 
@@ -21,9 +22,12 @@ public class NewsServiceImpl implements NewsService {
         try {
             validator.isValidNewsData(news);
             newsDAO.create(news);
-        } catch (DAOException | ValidationException ex) {
-            logger.error(ex);
-            throw new ServiceException(ex);
+        } catch (DAOException ex) {
+            logger.error(ex.getMessage(), ex);
+            throw new ServiceException(ExceptionValue.SERVER_ERROR.toString(), ex);
+        } catch (ValidationException ex) {
+            logger.error(ex.getMessage(), ex);
+            throw new ServiceException(ex.getMessage(), ex);
         }
     }
 
@@ -32,9 +36,12 @@ public class NewsServiceImpl implements NewsService {
         try {
             validator.isValidNews(news);
             newsDAO.update(news);
-        } catch (DAOException | ValidationException ex) {
-            logger.error(ex);
-            throw new ServiceException(ex);
+        } catch (DAOException ex) {
+            logger.error(ex.getMessage(), ex);
+            throw new ServiceException(ExceptionValue.SERVER_ERROR.toString(), ex);
+        } catch (ValidationException ex) {
+            logger.error(ex.getMessage(), ex);
+            throw new ServiceException(ex.getMessage(), ex);
         }
     }
 
@@ -47,11 +54,14 @@ public class NewsServiceImpl implements NewsService {
                 }
                 newsDAO.delete(newsList);
             } else {
-                throw new ServiceException("Invalid newslist");
+                throw new ServiceException(ExceptionValue.INVALID_NEWS_LIST.toString());
             }
-        } catch (DAOException | ValidationException ex) {
-            logger.error(ex);
-            throw new ServiceException(ex);
+        } catch (DAOException ex) {
+            logger.error(ex.getMessage(), ex);
+            throw new ServiceException(ExceptionValue.SERVER_ERROR.toString(), ex);
+        } catch (ValidationException ex) {
+            logger.error(ex.getMessage(), ex);
+            throw new ServiceException(ex.getMessage(), ex);
         }
     }
 
@@ -60,9 +70,12 @@ public class NewsServiceImpl implements NewsService {
         try {
             validator.isValidNewsId(news);
             return newsDAO.getById(news);
-        } catch (DAOException | ValidationException ex) {
-            logger.error(ex);
-            throw new ServiceException(ex);
+        } catch (DAOException ex) {
+            logger.error(ex.getMessage(), ex);
+            throw new ServiceException(ExceptionValue.SERVER_ERROR.toString(), ex);
+        } catch (ValidationException ex) {
+            logger.error(ex.getMessage(), ex);
+            throw new ServiceException(ex.getMessage(), ex);
         }
     }
 
@@ -71,8 +84,8 @@ public class NewsServiceImpl implements NewsService {
         try {
             return newsDAO.getAll();
         } catch (DAOException ex) {
-            logger.error(ex);
-            throw new ServiceException(ex);
+            logger.error(ex.getMessage(), ex);
+            throw new ServiceException(ExceptionValue.SERVER_ERROR.toString(), ex);
         }
     }
 }
