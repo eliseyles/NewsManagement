@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsDAOImpl implements NewsDAO {
+public class NewsDAOImpl extends BasicDAO implements NewsDAO {
     private Logger logger = Logger.getLogger(NewsDAOImpl.class);
     protected ConnectionPool connectionPool = ConnectionPool.INSTANCE;
 
@@ -51,13 +51,24 @@ public class NewsDAOImpl implements NewsDAO {
     }
 
     @Override
-    public void delete(News news) throws DAOException {
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement = buildDeleteByIDStatement(connection, news)) {
-            statement.executeUpdate();
+    public void delete(List<News> newsList) throws DAOException {
+        Connection connection = connectionPool.getConnection();
+        PreparedStatement statement = null;
+        try {
+            connection.setAutoCommit(false);
+            connection.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
+            for (News news : newsList) {
+                statement = buildDeleteByIDStatement(connection, news);
+                statement.executeUpdate();
+            }
+            connection.commit();
         } catch (SQLException ex) {
+            rollbackTransaction(connection);
             logger.error(ex);
-            throw new DAOException("Error while deleting element", ex);
+            throw new DAOException(ex);
+        } finally {
+            closeConnection(connection);
+            closeStatement(statement);
         }
     }
 

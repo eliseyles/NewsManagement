@@ -10,8 +10,7 @@ public interface NewsService {
 
     void update(News news) throws ServiceException;
 
-    void delete(News news) throws ServiceException;
-//    todo передавать из контроллера по одному удаялемые элемент или пачкой
+    void delete(List<News> newsList) throws ServiceException;
 
     News getById(News news) throws ServiceException;
 
