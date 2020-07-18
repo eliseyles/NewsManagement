@@ -27,6 +27,11 @@ public class NewsValidator {
         isValidContent(news);
     }
 
+    public void isValidNewsId(News news) throws ValidationException {
+        isNotNull(news);
+        isValidId(news);
+    }
+
     private void isNotNull(News news) throws ValidationException {
         if (news == null) {
             throw new ValidationException();
