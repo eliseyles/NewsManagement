@@ -7,7 +7,6 @@ import by.epam.khoroneko.pool.ConnectionPool;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
