@@ -192,3 +192,5 @@ hs_err_pid*
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,eclipse
 /.idea/
 /NewsManagement.iml
+src/main/resources/database.properties
+src/main/resources/log4j.properties
