@@ -62,6 +62,11 @@ public enum ConnectionPool {
     ConnectionPool() {
         availableConnections = new LinkedBlockingQueue<>(POOL_SIZE);
         usedConnections = new ArrayDeque<>();
+        try{
+            init();
+        }catch (ConnectionPoolException ex) {
+            logger.fatal(ex);
+        }
     }
 
     /**
