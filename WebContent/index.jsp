@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>News List</title>
-    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="fixed-header">
@@ -110,6 +110,6 @@
     <p>Copyright &copy EPAM 2020. All rights reserved</p>
 
 </div>
-<script src="../script/script.js"></script>
+<script src="script/script.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>News View</title>
-    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="fixed-header">
@@ -26,26 +26,26 @@
     </div>
     <div class="right">
         <div class="row">
-            <div class="column viewTitle">
+            <div class="col-15 viewTitle">
                 <p>News Title</p>
             </div>
-            <div class="column viewContent">
+            <div class="col-75 viewContent">
                 <p>Title</p>
             </div>
         </div>
         <div class="row">
-            <div class="column viewTitle">
+            <div class="col-15 viewTitle">
                 <p>News Date</p>
             </div>
-            <div class="column viewContent dateFormat">
+            <div class="col-75 viewContent dateFormat">
                 <p>10/12/2020</p>
             </div>
         </div>
         <div class="row">
-            <div class="column viewTitle">
+            <div class="col-15 viewTitle">
                 <p>Brief</p>
             </div>
-            <div class="column viewContent">
+            <div class="col-75 viewContent">
                 <p>Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief
                     Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief
                     Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief
@@ -53,10 +53,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="column viewTitle">
+            <div class="col-15 viewTitle">
                 <p>Content</p>
             </div>
-            <div class="column viewContent">
+            <div class="col-75 viewContent">
                 <p>
                     Some news Some newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome
                     newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome
@@ -80,6 +80,6 @@
 <div class="fixed-footer">
     <p>Copyright &copy EPAM 2020. All rights reserved</p>
 </div>
-<script src="../script/script.js"></script>
+<script src="../../../src/main/webapp/script/script.js"></script>
 </body>
 </html>
