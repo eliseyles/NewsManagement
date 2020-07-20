@@ -5,6 +5,7 @@ import by.epam.khoroneko.exception.ServiceException;
 import by.epam.khoroneko.service.NewsServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -21,6 +22,22 @@ public class IndexController {
 
         }
         return new ModelAndView("index", "newsList", entity);
+    }
+
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public String homeForward() {
+
+        return new String("forward:index");
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String finalPage() {
+        return "edit";
+    }
+
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public String view() {
+        return "view";
     }
 }
 

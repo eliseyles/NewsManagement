@@ -5,8 +5,10 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
+    <spring:url value="/css/style.css" var="styleCSS" />
+    <spring:url value="/script/script.js" var="scriptJS" />
+    <link href="${styleCSS}" rel="stylesheet" />
     <title>News View</title>
-    <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="fixed-header">
@@ -80,6 +82,6 @@
 <div class="fixed-footer">
     <p>Copyright &copy EPAM 2020. All rights reserved</p>
 </div>
-<script src="../../../src/main/webapp/script/script.js"></script>
+<script src="${scriptJS}"></script>
 </body>
 </html>
