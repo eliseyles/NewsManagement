@@ -113,17 +113,59 @@ body {
 .buttonGroup {
     float: right;
     right: 0;
-    margin-top: 40px;
-    margin-right: 0;
+    margin: 40px;
 }
 
 .viewTitle{
     color: #969696;
-    width: 20%;
-    float: left;
+    margin-left: 10px;
 }
 
 .viewContent {
-    width: 80%;
+    margin-right: 10px;
+}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #969696;
+    border-radius: 2px;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+input[type=submit] {
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
     float: right;
 }
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-15 {
+    float: left;
+    width: 15%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+.col-85 {
+    float: left;
+    width: 85%;
+    margin-top: 6px;
+}
+
