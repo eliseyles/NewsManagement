@@ -20,7 +20,7 @@ public class IndexController {
         } catch (ServiceException ex) {
 
         }
-        return new ModelAndView("/index.jsp", "array", entity);
+        return new ModelAndView("index", "newsList", entity);
     }
 }
 
