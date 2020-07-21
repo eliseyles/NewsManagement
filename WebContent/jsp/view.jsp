@@ -22,8 +22,8 @@
     <div class="left">
         <ul class="menu">
             <li class="menuTitle"><p>News</p></li>
-            <li class="menuItem"><a class="active" href="#list">News List</a></li>
-            <li class="menuItem"><a href="#add">Add News</a></li>
+            <li class="menuItem"><a class="active" href="${pageContext.request.contextPath}/home">News List</a></li>
+            <li class="menuItem"><a href="${pageContext.request.contextPath}/add">Add News</a></li>
         </ul>
     </div>
     <div class="right">
