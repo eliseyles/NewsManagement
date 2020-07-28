@@ -1,8 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java"
          pageEncoding="UTF-8" %>
-<%@ page isELIgnored="false" %>
+
 <html>
 <head>
     <spring:url value="/css/style.css" var="styleCSS" />
@@ -27,13 +28,14 @@
         </ul>
     </div>
     <div class="right">
-        <form>
+        <form action="${pageContext.request.contextPath}/add_news" method="post">
             <div class="row">
                 <div class="col-15 viewTitle">
                     <p>News Title</p>
                 </div>
                 <div class="col-75">
-                    <input type="text" maxlength="100" name="#title" required>
+                    <input type="hidden" name="id" value="0" required>
+                    <input type="text" maxlength="100" name="title" required>
                 </div>
             </div>
             <div class="row">
@@ -41,7 +43,7 @@
                     <p>News Date</p>
                 </div>
                 <div class="col-75">
-                    <input type="text" maxlength="10" name="#title" required>
+                    <input type="text" maxlength="10" name="date" required value="${todayDate}">
                 </div>
             </div>
             <div class="row">
@@ -49,7 +51,7 @@
                     <p>Brief</p>
                 </div>
                 <div class="col-75">
-                   <textarea maxlength="500" required></textarea>
+                   <textarea maxlength="500" name="brief" required></textarea>
                 </div>
             </div>
             <div class="row">
@@ -57,12 +59,12 @@
                     <p>Content</p>
                 </div>
                 <div class="col-75">
-                    <textarea maxlength="2048" required></textarea>
+                    <textarea maxlength="2048" name="content" required></textarea>
                 </div>
             </div>
             <div class="row buttonGroup" style="margin-right: 50%">
-                <button class="button" type="submit" name="#saveCommand" value="#commandName">Save</button>
-                <button class="button" type="submit" name="#cancelCommand" value="#commandName">Cancel</button>
+                <button class="button" type="submit" name="command" value="save">Save</button>
+                <button class="button" type="submit" name="command" value="cancel">Cancel</button>
             </div>
         </form>
     </div>

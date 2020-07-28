@@ -27,6 +27,7 @@
         <url-pattern>/index</url-pattern>
         <url-pattern>/view</url-pattern>
         <url-pattern>/edit</url-pattern>
+        <url-pattern>/add_news</url-pattern>
     </servlet-mapping>
 
 </web-app>
