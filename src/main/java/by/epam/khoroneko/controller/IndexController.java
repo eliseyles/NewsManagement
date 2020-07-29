@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -103,6 +104,21 @@ public class IndexController {
 
         }
         return new ModelAndView("redirect:index");
+    }
+
+    @RequestMapping(value = "/delete_checked", method = RequestMethod.POST)
+    public String deleteChecked(HttpServletRequest request) {
+        try {
+            String[] idList = request.getParameterValues("id");
+            List<News> deletedNews = new ArrayList<>();
+            for (String id : idList) {
+                deletedNews.add(new NewsBuilder().setId(Integer.parseInt(id)).getEntity());
+            }
+            newsService.delete(deletedNews);
+        } catch (ServiceException ex) {
+
+        }
+        return "redirect:home";
     }
 }
 

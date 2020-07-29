@@ -27,7 +27,7 @@
         </ul>
     </div>
     <div class="right">
-        <form>
+        <form action="${pageContext.request.contextPath}/delete_checked" method="post">
             <c:if test="${empty newsList}">
                 <h1>No news here yet</h1>
             </c:if>
@@ -56,12 +56,11 @@
                             <a href="${pageContext.request.contextPath}/edit?id=${news.id}">edit</a>
                         </div>
                         <div class="column" style="margin-left: 5px">
-                            <input type="checkbox" value="1" onclick="f()">
+                            <input type="checkbox" value="${news.id}" name="id" onclick="f()">
                         </div>
                     </div>
                 </div>
             </c:forEach>
-
 
             <div class="buttonGroup">
                 <button class="button" type="submit" id="deleteBtn" hidden>Delete</button>
