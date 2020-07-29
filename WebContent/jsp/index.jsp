@@ -52,8 +52,8 @@
                     </div>
                     <div class="row" style="float: right">
                         <div class="column">
-                            <a href="${pageContext.request.contextPath}/view">view</a>
-                            <a href="${pageContext.request.contextPath}/edit">edit</a>
+                            <a href="${pageContext.request.contextPath}/view?id=${news.id}">view</a>
+                            <a href="${pageContext.request.contextPath}/edit?id=${news.id}">edit</a>
                         </div>
                         <div class="column" style="margin-left: 5px">
                             <input type="checkbox" value="1" onclick="f()">

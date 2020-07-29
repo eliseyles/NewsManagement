@@ -28,14 +28,16 @@
         </ul>
     </div>
     <div class="right">
-        <form action="${pageContext.request.contextPath}/add_news" method="post">
+        <form action="${pageContext.request.contextPath}/save_news" method="post" id="edit-form">
             <div class="row">
                 <div class="col-15 viewTitle">
                     <p>News Title</p>
                 </div>
                 <div class="col-75">
-                    <input type="hidden" name="id" value="0" required>
-                    <input type="text" maxlength="100" name="title" required>
+                    <input type="hidden" maxlength="100" name="id" required
+                           value="<c:if test="${news!=null}">${news.id}</c:if><c:if test="${news==null}">0</c:if>">
+                    <input type="text" maxlength="100" name="title" required
+                           value="<c:if test="${news!=null}">${news.title}</c:if>">
                 </div>
             </div>
             <div class="row">
@@ -43,7 +45,8 @@
                     <p>News Date</p>
                 </div>
                 <div class="col-75">
-                    <input type="text" maxlength="10" name="date" required value="${todayDate}">
+                    <input type="text" maxlength="10" name="date" required
+                           value="<c:if test="${news!=null}">${news.date}</c:if><c:if test="${news==null}">${todayDate}</c:if>">
                 </div>
             </div>
             <div class="row">
@@ -51,7 +54,7 @@
                     <p>Brief</p>
                 </div>
                 <div class="col-75">
-                   <textarea maxlength="500" name="brief" required></textarea>
+                   <textarea maxlength="500" name="brief" required><c:if test="${news!=null}">${news.brief}</c:if></textarea>
                 </div>
             </div>
             <div class="row">
@@ -59,14 +62,15 @@
                     <p>Content</p>
                 </div>
                 <div class="col-75">
-                    <textarea maxlength="2048" name="content" required></textarea>
+                    <textarea maxlength="2048" name="content" required><c:if test="${news!=null}">${news.content}</c:if></textarea>
                 </div>
             </div>
-            <div class="row buttonGroup" style="margin-right: 50%">
-                <button class="button" type="submit" name="command" value="save">Save</button>
-                <button class="button" type="submit" name="command" value="cancel">Cancel</button>
-            </div>
         </form>
+        <form action="${pageContext.request.getHeader("referer")}" method="get" id="cancel"></form>
+        <div class="row buttonGroup" style="margin-right: 50%">
+            <button form="edit-form" class="button" type="submit" name="command" value="save">Save</button>
+            <button form="cancel" class="button" type="submit" name="id" value="${news.id}">Cancel</button>
+        </div>
     </div>
 </div>
 <div class="fixed-footer">

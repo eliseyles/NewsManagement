@@ -1,5 +1,6 @@
 package by.epam.khoroneko.controller;
 
+import by.epam.khoroneko.builder.NewsBuilder;
 import by.epam.khoroneko.entity.News;
 import by.epam.khoroneko.exception.ServiceException;
 import by.epam.khoroneko.service.NewsService;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -41,32 +43,36 @@ public class IndexController {
         return new ModelAndView("edit", "todayDate", LocalDate.now());
     }
 
-    @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public String view() {
-        return "view";
-    }
-
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String edit() {
-        return "edit";
+    public ModelAndView edit(@RequestParam("id") int id) {
+        News news = null;
+        try {
+            news = newsService.getById(new NewsBuilder().setId(id).getEntity());
+        } catch (ServiceException ex) {
+
+        }
+        return new ModelAndView("edit", "news", news);
     }
 
-    @RequestMapping(value = "/add_news", method = RequestMethod.POST)
+    @RequestMapping(value = "/save_news", method = RequestMethod.POST)
     public String newsAdding(@RequestParam("id") int id,
                              @RequestParam("title") String title,
                              @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-                                 @RequestParam("date") LocalDate date,
+                             @RequestParam("date") LocalDate date,
                              @RequestParam("brief") String brief,
                              @RequestParam("content") String content,
-                             @RequestParam("command") String command, HttpServletRequest request)
-
-    {
+                             @RequestParam("command") String command, HttpServletRequest request) {
         String response = "redirect:index";
         try {
 
             if (command.equals("save")) {
-                News news = new News(id, title, date, brief, content);
-                newsService.create(news);
+                if (id == 0) {
+                    News news = new News(id, title, date, brief, content);
+                    newsService.create(news);
+                } else {
+                    News news = new News(id, title, date, brief, content);
+                    newsService.update(news);
+                }
             } else {
                 response = request.getRequestURL().toString();
             }
@@ -74,6 +80,29 @@ public class IndexController {
 
         }
         return response;
+    }
+
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public ModelAndView view(@RequestParam("id") int id) {
+        News news = null;
+        try {
+            news = newsService.getById(new NewsBuilder().setId(id).getEntity());
+        } catch (ServiceException ex) {
+
+        }
+        return new ModelAndView("view", "news", news);
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public ModelAndView delete(@RequestParam("id") int id) {
+        try {
+            List<News> delete = new ArrayList<>();
+            delete.add(new NewsBuilder().setId(id).getEntity());
+            newsService.delete(delete);
+        } catch (ServiceException ex) {
+
+        }
+        return new ModelAndView("redirect:index");
     }
 }
 

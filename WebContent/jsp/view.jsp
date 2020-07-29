@@ -5,9 +5,9 @@
          pageEncoding="UTF-8" %>
 <html>
 <head>
-    <spring:url value="/css/style.css" var="styleCSS" />
-    <spring:url value="/script/script.js" var="scriptJS" />
-    <link href="${styleCSS}" rel="stylesheet" />
+    <spring:url value="/css/style.css" var="styleCSS"/>
+    <spring:url value="/script/script.js" var="scriptJS"/>
+    <link href="${styleCSS}" rel="stylesheet"/>
     <title>News View</title>
 </head>
 <body>
@@ -32,7 +32,7 @@
                 <p>News Title</p>
             </div>
             <div class="col-75 viewContent">
-                <p>Title</p>
+                <p>${news.title}</p>
             </div>
         </div>
         <div class="row">
@@ -40,7 +40,7 @@
                 <p>News Date</p>
             </div>
             <div class="col-75 viewContent dateFormat">
-                <p>10/12/2020</p>
+                <p>${news.date}</p>
             </div>
         </div>
         <div class="row">
@@ -48,10 +48,7 @@
                 <p>Brief</p>
             </div>
             <div class="col-75 viewContent">
-                <p>Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief
-                    Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief
-                    Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief Brief
-                    Brief Brief Brief Brief Brief </p>
+                <p>${news.brief}</p>
             </div>
         </div>
         <div class="row">
@@ -59,23 +56,14 @@
                 <p>Content</p>
             </div>
             <div class="col-75 viewContent">
-                <p>
-                    Some news Some newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome
-                    newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome
-                    newsSome
-                    Some newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome
-                    news
-                    Some newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome
-                    news
-                    Some newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome
-                    news
-                    Some newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome newsSome news news
-                </p>
+                <p>${news.content}</p>
             </div>
         </div>
+        <form action="${pageContext.request.contextPath}/edit" method="get" id="edit-form"></form>
+        <form action="${pageContext.request.contextPath}/delete?id=${news.id}" method="post" id="delete-form"></form>
         <div class="row buttonGroup">
-            <button class="button" type="button" name="#EditCommand" value="#commandName">Edit</button>
-            <button class="button" type="button" name="#DeleteCommand" value="#commandName">Delete</button>
+            <button form="edit-form" class="button" type="submit" name="id" value="${news.id}">Edit</button>
+            <button form="delete-form" class="button" type="submit">Delete</button>
         </div>
     </div>
 </div>
