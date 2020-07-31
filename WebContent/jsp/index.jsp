@@ -3,35 +3,30 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java"
          pageEncoding="UTF-8" %>
+<c:if test="${not empty sessionScope.language}">
+    <fmt:setLocale value="${sessionScope.language}"/>
+</c:if>
+<fmt:setBundle basename="locale"/>
 <html>
 <head>
-    <spring:url value="/css/style.css" var="styleCSS" />
-    <spring:url value="/script/script.js" var="scriptJS" />
-    <link href="${styleCSS}" rel="stylesheet" />
-    <title>News List</title>
+    <spring:url value="/css/style.css" var="styleCSS"/>
+    <spring:url value="/script/script.js" var="scriptJS"/>
+    <link href="${styleCSS}" rel="stylesheet"/>
+    <title><fmt:message key="index.title"/></title>
 </head>
 <body>
 <div class="fixed-header">
-    <ul class="nav">
-        <li class="navTitle"><p>News management</p></li>
-        <li><a class="navLink" style="float:right" href="#eng">English</a></li>
-        <li><a class="navLink" style="float:right" href="#rus">Russian</a></li>
-    </ul>
+    <jsp:include page="navbar.jsp"/>
 </div>
 <div class="container">
     <div class="left">
-        <ul class="menu">
-            <li class="menuTitle"><p>News</p></li>
-            <li class="menuItem"><a class="active" href="${pageContext.request.contextPath}/home">News List</a></li>
-            <li class="menuItem"><a href="${pageContext.request.contextPath}/add">Add News</a></li>
-        </ul>
+        <jsp:include page="menu.jsp"/>
     </div>
     <div class="right">
         <form action="${pageContext.request.contextPath}/delete_checked" method="post">
             <c:if test="${empty newsList}">
-                <h1>No news here yet</h1>
+                <h1><fmt:message key="index.list.empty"/></h1>
             </c:if>
-
             <c:forEach var="news" items="${newsList}">
                 <div class="news">
                     <div class="row">
@@ -52,8 +47,12 @@
                     </div>
                     <div class="row" style="float: right">
                         <div class="column">
-                            <a href="${pageContext.request.contextPath}/view?id=${news.id}">view</a>
-                            <a href="${pageContext.request.contextPath}/edit?id=${news.id}">edit</a>
+                            <a href="${pageContext.request.contextPath}/view?id=${news.id}">
+                                <fmt:message key="index.news.view"/>
+                            </a>
+                            <a href="${pageContext.request.contextPath}/edit?id=${news.id}">
+                                <fmt:message key="index.news.edit"/>
+                            </a>
                         </div>
                         <div class="column" style="margin-left: 5px">
                             <input type="checkbox" value="${news.id}" name="id" onclick="f()">
@@ -61,16 +60,15 @@
                     </div>
                 </div>
             </c:forEach>
-
             <div class="buttonGroup">
-                <button class="button" type="submit" id="deleteBtn" hidden>Delete</button>
+                <button class="button" type="submit" id="deleteBtn" hidden>
+                    <fmt:message key="index.delete"/>
+                </button>
             </div>
         </form>
     </div>
 </div>
-<div class="fixed-footer">
-    <p>Copyright &copy EPAM 2020. All rights reserved</p>
-</div>
+<jsp:include page="footer.jsp"/>
 <script src="${scriptJS}"></script>
 </body>
 </html>

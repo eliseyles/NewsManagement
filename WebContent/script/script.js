@@ -22,4 +22,3 @@ function f() {
 }
 
 document.addEventListener("change", f);
-

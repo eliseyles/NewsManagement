@@ -70,7 +70,11 @@ body {
 
 .navLink {
     margin: 40px 10px 0;
-    text-decoration: none;
+    background: none!important;
+    border: none;
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .navTitle {

@@ -3,33 +3,30 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java"
          pageEncoding="UTF-8" %>
+<%@ page isELIgnored="false" %>
+<c:if test="${not empty sessionScope.language}">
+    <fmt:setLocale value="${sessionScope.language}"/>
+</c:if>
+<fmt:setBundle basename="locale"/>
 <html>
 <head>
     <spring:url value="/css/style.css" var="styleCSS"/>
     <spring:url value="/script/script.js" var="scriptJS"/>
     <link href="${styleCSS}" rel="stylesheet"/>
-    <title>News View</title>
+    <title><fmt:message key="view.title"/></title>
 </head>
 <body>
 <div class="fixed-header">
-    <ul class="nav">
-        <li class="navTitle"><p>News management</p></li>
-        <li><a class="navLink" style="float:right" href="#eng">English</a></li>
-        <li><a class="navLink" style="float:right" href="#rus">Russian</a></li>
-    </ul>
+    <jsp:include page="navbar.jsp"/>
 </div>
 <div class="container">
     <div class="left">
-        <ul class="menu">
-            <li class="menuTitle"><p>News</p></li>
-            <li class="menuItem"><a class="active" href="${pageContext.request.contextPath}/home">News List</a></li>
-            <li class="menuItem"><a href="${pageContext.request.contextPath}/add">Add News</a></li>
-        </ul>
+        <jsp:include page="menu.jsp"/>
     </div>
     <div class="right">
         <div class="row">
             <div class="col-15 viewTitle">
-                <p>News Title</p>
+                <p><fmt:message key="news.title"/></p>
             </div>
             <div class="col-75 viewContent">
                 <p>${news.title}</p>
@@ -37,7 +34,7 @@
         </div>
         <div class="row">
             <div class="col-15 viewTitle">
-                <p>News Date</p>
+                <p><fmt:message key="news.date"/></p>
             </div>
             <div class="col-75 viewContent dateFormat">
                 <p>${news.date}</p>
@@ -45,7 +42,7 @@
         </div>
         <div class="row">
             <div class="col-15 viewTitle">
-                <p>Brief</p>
+                <p><fmt:message key="news.brief"/></p>
             </div>
             <div class="col-75 viewContent">
                 <p>${news.brief}</p>
@@ -53,7 +50,7 @@
         </div>
         <div class="row">
             <div class="col-15 viewTitle">
-                <p>Content</p>
+                <p><fmt:message key="news.content"/></p>
             </div>
             <div class="col-75 viewContent">
                 <p>${news.content}</p>
@@ -62,14 +59,16 @@
         <form action="${pageContext.request.contextPath}/edit" method="get" id="edit-form"></form>
         <form action="${pageContext.request.contextPath}/delete?id=${news.id}" method="post" id="delete-form"></form>
         <div class="row buttonGroup">
-            <button form="edit-form" class="button" type="submit" name="id" value="${news.id}">Edit</button>
-            <button form="delete-form" class="button" type="submit">Delete</button>
+            <button form="edit-form" class="button" type="submit" name="id" value="${news.id}">
+                <fmt:message key="view.edit"/>
+            </button>
+            <button form="delete-form" class="button" type="submit">
+                <fmt:message key="view.delete"/>
+            </button>
         </div>
     </div>
 </div>
-<div class="fixed-footer">
-    <p>Copyright &copy EPAM 2020. All rights reserved</p>
-</div>
+<jsp:include page="footer.jsp"/>
 <script src="${scriptJS}"></script>
 </body>
 </html>
