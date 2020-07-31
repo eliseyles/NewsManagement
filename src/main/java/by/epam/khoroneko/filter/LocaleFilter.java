@@ -1,5 +1,7 @@
 package by.epam.khoroneko.filter;
 
+import by.epam.khoroneko.util.Attribute;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
@@ -21,12 +23,12 @@ public class LocaleFilter extends HttpFilter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpSession session = req.getSession(true);
-        if (session.getAttribute("language") == null) {
-            session.setAttribute("language", ENGLISH);
+        if (session.getAttribute(Attribute.LANGUAGE.getValue()) == null) {
+            session.setAttribute(Attribute.LANGUAGE.getValue(), ENGLISH);
         }
-        String language = req.getParameter("language");
+        String language = req.getParameter(Attribute.LANGUAGE.getValue());
         if (language != null) {
-            session.setAttribute("language", new Locale(language));
+            session.setAttribute(Attribute.LANGUAGE.getValue(), new Locale(language));
             resp.sendRedirect(req.getRequestURL().toString());
             return;
         }
