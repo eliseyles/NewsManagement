@@ -58,13 +58,13 @@ public class NewsValidator {
     }
 
     private void isValidBrief(News news) throws ValidationException {
-        if (news.getBrief().matches(BRIEF_REGEX)) {
+        if (!news.getBrief().matches(BRIEF_REGEX)) {
             throw new ValidationException(ExceptionValue.INVALID_NEWS_BRIEF.toString());
         }
     }
 
     private void isValidContent(News news) throws ValidationException {
-        if (news.getContent().matches(CONTENT_REGEX)) {
+        if (!news.getContent().matches(CONTENT_REGEX)) {
             throw new ValidationException(ExceptionValue.INVALID_NEWS_CONTENT.toString());
         }
     }
